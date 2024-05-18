@@ -75,22 +75,21 @@ class TodoController extends Controller
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $id)
+    public function update($id)
     {
-        $todo = Todo::find($id);
+        $todo = Todo::findOrFail($id);
         $todo->completed = !$todo->completed;
         $todo->save();
 
         return response()->json(['success' => true]);
     }
-
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $id)
+    public function destroy($id)
     {
         Todo::destroy($id);
         return response()->json(['success' => true]);
